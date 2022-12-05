@@ -4,4 +4,4 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/doh-vpn-pro
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/nosafesearch.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/dyndns.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/personal.txt
-https://schakal.ru/hosts/hosts.txt
+https://schakal.ru/hosts/alive_hosts.txt

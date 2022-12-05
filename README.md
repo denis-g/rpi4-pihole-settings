@@ -11,13 +11,15 @@
 - [Pi-hole](#-pi-hole)
 - [pihole-updatelists](#-pihole-updatelists)
 - [unbound](#-unbound) or [DNSCrypt](#-dnscrypt)
-- [Update system](#-update-system-and-reboot)
+- [Update system and lists](#-update-system-and-lists)
 
 ---
 
 ## 🔹 Raspberry Pi OS Lite
 
 Raspberry PI OS Lite is a minimal operating system. It fits the needs of a very light OS with a minimal set of packages. It is suggested only for experienced people able to use ssh connections and remote management with a Command Line Interface (CLI), without Graphical interfaces or Desktop Environment.
+
+See [details](https://www.raspberrypi.com/software/operating-systems/).
 
 ### Install
 
@@ -117,23 +119,25 @@ net.ipv6.conf.wlan0.disable_ipv6 = 1
 
 Useful for Raspberry Pi for not writing on the SD card all the time.
 
+See [details](https://github.com/azlux/log2ram).
+
 ### Install
 
 ```shell
-sudo apt install rsync
+sudo apt -y install rsync
 echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bullseye main" | sudo tee /etc/apt/sources.list.d/azlux.list
 sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg https://azlux.fr/repo.gpg
 sudo apt update
-sudo apt install log2ram
+sudo apt -y install log2ram
 ```
 
 ### Configuration
 
+For generates many logs (like a Pi-hole), you needed to increasing this to a larger amount, such as 256M.
+
 ```shell
 sudo nano /etc/log2ram.conf
 ```
-
-For generates many logs (like a Pi-hole), you needed to increasing this to a larger amount, such as 256M.
 
 ```ini
 SIZE=256M
@@ -155,11 +159,12 @@ SystemMaxUse=20M
 
 The Pi-hole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software.
 
+See [details](https://docs.pi-hole.net/).
+
 ### Install
 
 ```shell
-wget -O basic-install.sh https://install.pi-hole.net
-sudo bash basic-install.sh
+curl -sSL https://install.pi-hole.net | sudo bash
 ```
 
 ### Configuration
@@ -172,16 +177,18 @@ Use wizard and set up.
 
 Update Pi-hole's lists from remote sources.
 
+See [details](https://github.com/jacklul/pihole-updatelists).
+
 ### Install
 
 ```shell
-sudo apt-get install php-cli sqlite3 php-sqlite3 php-intl php-curl
+sudo apt -y install php-cli sqlite3 php-sqlite3 php-intl php-curl
 wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
 ```
 
 ### Configuration
 
-Clear all preinstalled Pi-hole adlists and rules:
+Clear all preinstalled Pi-hole lists and rules:
 
 ```shell
 sudo sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE type=0;" # whitelist
@@ -206,7 +213,7 @@ BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/ma
 REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt"
 ```
 
-For update lists use:
+For update lists and rules use:
 
 ```shell
 sudo pihole-updatelists
@@ -214,9 +221,11 @@ sudo pihole-updatelists
 
 Recommended lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
-- [Schakal Hosts](https://schakal.ru/hosts/hosts.txt), RU-adlist, see [details](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
-- [Commonly White List](https://github.com/anudeepND/whitelist)
+- [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
+
+Personal lists:
+- [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
 
 
 For check domain available and see the lists for a specified domain use:
@@ -229,19 +238,23 @@ pihole -q example.com
 
 ## 🔹 unbound
 
+> This is alternative for [DNSCrypt](#-dnscrypt) with current config, don't use both.
+
 Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards.
 
-This is alternative for [DNSCrypt](#-dnscrypt) with current config, don't use both.
+See [details](https://unbound.docs.nlnetlabs.nl/en/latest/).
 
 ### Install
 
 ```shell
-sudo apt install unbound
+sudo apt -y install unbound
 ```
 
 ### Configuration
 
 More information about settings see on official [Pi-hole](https://docs.pi-hole.net/guides/dns/unbound/) and [unbound](https://nlnetlabs.nl/documentation/unbound/unbound.conf/) documentation.
+
+Create new config:
 
 ```shell
 sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
@@ -303,11 +316,13 @@ forward-zone:
     forward-addr: 1.0.0.1@853#cloudflare-dns.com
 ```
 
-Set `unbound` as custom DNS on Pi-hole admin panel `Settings > DNS`:
+Set `unbound` as custom DNS server on Pi-hole admin panel `Settings > DNS`:
 
-- Uncheck all DNS services
-- Check `Use DNSSEC`
-- Set `Custom 1 (IPv4)` as `127.0.0.1#5533`
+![Enable custom DNS server](https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/custom-dns.png)
+
+And enable DNSSEC on `Advanced DNS settings`:
+
+![Enable DNSSEC](https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/enable-dnssec.png)
 
 Apply config and restart service:
 
@@ -322,9 +337,11 @@ sudo systemctl restart pihole-FTL
 
 ## 🔹 DNSCrypt
 
+> This is alternative for [unbound](#-unbound) with current config, don't use both.
+
 A flexible DNS proxy, with support for modern encrypted DNS protocols such as DNSCrypt v2, DNS-over-HTTPS, Anonymized DNSCrypt and ODoH (Oblivious DoH).
 
-This is alternative for [unbound](#-unbound) with current config, don't use both.
+See [details](https://github.com/DNSCrypt/dnscrypt-proxy).
 
 ### Install
 
@@ -361,26 +378,25 @@ sudo ./dnscrypt-proxy/dnscrypt-proxy -service install
 sudo ./dnscrypt-proxy/dnscrypt-proxy -service start
 ```
 
-Set `DNSCrypt` as custom DNS on Pi-hole admin panel `Settings > DNS`:
+Set `DNSCrypt` as custom DNS server on Pi-hole admin panel `Settings > DNS`:
 
-- Uncheck all DNS services 
-- Set `Custom 1 (IPv4)` as `127.0.0.1#5533`
+![Enable custom DNS server](https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/custom-dns.png)
 
 > To ensure the bootstrap is your DNS server you must redirect or block standard DNS port (TCP/UDP 53) and block all DOT (TCP 853) port.
 
 ---
 
-## 🔹 Update system
+## 🔹 Update system and lists
 
 ```shell
 sudo apt update && \
-sudo apt upgrade && \
+sudo apt -y upgrade && \
 sudo apt clean && \
 sudo apt autoclean && \
 sudo apt autoremove && \
+sudo rpi-update && \
+sudo pihole -up && \
 sudo pihole-updatelists --update && \
 sudo pihole-updatelists && \
-sudo pihole -up && \
-sudo rpi-update && \
 sudo reboot
 ```
