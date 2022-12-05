@@ -11,8 +11,6 @@ graph.oculus.com
 # XBOX
 v10.events.data.microsoft.com
 v20.events.data.microsoft.com
-# Ubisoft
-ubiservices.data.ubi.com
 
 # UBISOFT
 ubiservices.data.ubi.com

@@ -2,3 +2,9 @@
 # Add only regex domain name (ex. .*\.cloudfront\.net) for fix broken sites
 
 #-----------------------------------------------------------------------------#
+
+# APPLE
+.*\.xp\.apple\.com
+
+# TORRENTS
+.*\.rutracker\.cc
