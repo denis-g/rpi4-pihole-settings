@@ -5,3 +5,4 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/nosafesearc
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/dyndns.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/personal.txt
 https://schakal.ru/hosts/alive_hosts.txt
+https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile.txt
