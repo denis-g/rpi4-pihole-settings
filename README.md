@@ -100,19 +100,6 @@ net.ipv6.conf.eth0.disable_ipv6 = 1
 net.ipv6.conf.wlan0.disable_ipv6 = 1
 ```
 
-```console
-sudo nano /etc/sysctl.conf
-```
-
-```ini
-# Disable IPv6
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
-net.ipv6.conf.lo.disable_ipv6 = 1
-net.ipv6.conf.eth0.disable_ipv6 = 1
-net.ipv6.conf.wlan0.disable_ipv6 = 1
-```
-
 ---
 
 ## 🔹 log2ram
@@ -225,6 +212,7 @@ Recommended lists:
 - [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
 
 Personal lists:
+- [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
 - [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
 
 
