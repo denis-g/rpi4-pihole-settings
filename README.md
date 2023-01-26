@@ -197,7 +197,7 @@ ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/mast
 WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
 REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
 BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
-REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://github.com/MajkiIT/polish-ads-filter/blob/master/polish-pihole-filters/hostfile_regex.txt"
+REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://github.com/MajkiIT/polish-ads-filter/blob/master/polish-pihole-filters/hostfile_regex.txt https://perflyst.github.io/PiHoleBlocklist/regex.list"
 ```
 
 For update lists and rules use:
@@ -209,6 +209,7 @@ sudo pihole-updatelists
 Recommended lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
+- [PiHole and AGH Blocklists](https://github.com/Perflyst/PiHoleBlocklist), Smart TV blacklist and regex
 - [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
 
 Personal lists:
