@@ -17,7 +17,7 @@
 
 ## 🔹 Overview
 
-Basic setup `Pi-hole` on Raspberry Pi with powerful ad-block utils.
+Basic Raspberry Pi 4 on DietPi with Pi-hole and Unbound for more privacy.
 
 Ingredients:
 
@@ -59,20 +59,18 @@ AUTO_SETUP_WEB_SERVER_INDEX=-2
 CONFIG_ENABLE_IPV6=0
 ```
 
-Connect to your berry on console and wait to auto-install completed.
+Connect to your berry on the console and wait to auto-install completed.
 
 ```shell
 ssh root@192.168.0.3
 ```
 
-Use wizard and set up. After launch `DietPi-Software` select `Search Software`, find and check:
+Use the wizard and set it up. After launching `DietPi-Software` select `Search Software`, find and check:
 - [Pi-hole](https://dietpi.com/docs/software/dns_servers/#pi-hole)
 - [Unbound](https://dietpi.com/docs/software/dns_servers/#unbound)
 - [SQLite](https://dietpi.com/docs/software/databases/#sqlite)
 
-And select `Install`.
-
-Install `pihole-updatelists`:
+And select `Install`. After all is completed install `pihole-updatelists`:
 
 ```shell
 wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
@@ -82,7 +80,7 @@ wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/in
 
 ## 🔹 Configuration
 
-Set new personal lists:
+Set your personal lists:
 
 ```shell
 nano /etc/pihole-updatelists.conf
@@ -111,7 +109,7 @@ For update lists and rules use:
 pihole-updatelists
 ```
 
-For check domain available and see the lists for a specified domain use:
+To check domain available and see the lists for a specified domain use:
 
 ```shell
 pihole -q example.com
@@ -145,7 +143,7 @@ adlist enabled=1  # enabled adlists
 
 </details>
 
-Update and upgrade all system:
+Update, upgrade system, and all packages:
 
 ```shell
 apt update -y && \
