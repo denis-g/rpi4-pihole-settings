@@ -1,9 +1,9 @@
 # Raspberry Pi and Pi-hole
 
-<div style="text-align: center;">
-  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/dietpi.png" alt="DietPi" style="width: auto; height: 60px;" />
-  &nbsp;
-  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/pihole.svg" alt="Pi-hole" style="width: auto; height: 60px;" />
+<div align="center">
+  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/dietpi.png" alt="DietPi" style="width: auto; height: 200px;" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/pihole.svg" alt="Pi-hole" style="width: auto; height: 200px;" />
 </div>
 
 ---
@@ -21,13 +21,13 @@ Basic setup `Pi-hole` on Raspberry Pi with powerful ad-block utils.
 
 Ingredients:
 
-> **DietPi**: DietPi is an extremely lightweight Debian-based OS. It is highly optimised for minimal CPU and RAM resource usage, ensuring your SBC always runs at its maximum potential. See [details](https://github.com/MichaIng/DietPi).
+> **[DietPi](https://github.com/MichaIng/DietPi)**: DietPi is an extremely lightweight Debian-based OS. It is highly optimised for minimal CPU and RAM resource usage, ensuring your SBC always runs at its maximum potential.
 
-> **Pi-hole**: Pi-hole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software. See [details](https://docs.pi-hole.net/).
+> **[Pi-hole](https://docs.pi-hole.net/)**: Pi-hole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software.
 
-> **pihole-updatelists**: Update Pi-hole's lists from remote sources. See [details](https://github.com/jacklul/pihole-updatelists).
+> **[pihole-updatelists](https://github.com/jacklul/pihole-updatelists)**: Update Pi-hole's lists from remote sources.
 
-> **Unbound**: Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards. See [details](https://unbound.docs.nlnetlabs.nl/en/latest/).
+> **[Unbound](https://unbound.docs.nlnetlabs.nl/en/latest/)**: Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards.
 
 ---
 
