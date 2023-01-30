@@ -152,7 +152,6 @@ apt update -y && \
 apt upgrade -y && \
 apt autoremove -y --purge && \
 apt autoclean -y && \
-rpi-update && \
 pihole -up && \
 pihole-updatelists --update && \
 pihole-updatelists && \
