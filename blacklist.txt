@@ -3,26 +3,41 @@
 
 #-----------------------------------------------------------------------------#
 
-# AD SCAM
+# Ad
 yastatic.net
 
-# SMART TV (WEBOS)
-cdpbeacon.lgtvcommon.com
-cdpsvc.lgtvcommon.com
-homeprv.lgtvcommon.com
-nudge.lgtvcommon.com
-rdl.lgtvcommon.com
-recommend.lgtvcommon.com
-lgsmartad.com
-service.lgtvcommon.com
+# Smart TV (LG)
+ad.lgsmartad.com
+info.lgsmartad.com
+# dashboard
 eic.recommend.lgtvcommon.com
-eic.service.lgtvcommon.com
-eic.nudge.lgtvcommon.com
-eic.netflixvoice.lgtvcommon.com
-eic.homeprv.lgtvcommon.com
-eic.cdpsvc.lgtvcommon.com
-fr.rdx2.lgtvsdp.com
-fr.ibs.lgappstv.com
-discovery.meethue.com
-eic.cdpbeacon.lgtvcommon.com
 eic.rdl.lgtvcommon.com
+eic.homeprv.lgtvcommon.com
+eic.nudge.lgtvcommon.com
+region.lgtvsdp.com
+eic.service.lgtvcommon.com
+region.ibsstat.lgappstv.com
+www.ueiwsp.com
+# sports
+eic.sports.lgtviot.com
+# app store
+region.lgeapi.com
+region.lgrecommends.lgappstv.com
+ngfts.lge.com
+# internet channels
+eic.cdplauncher.lgtvcommon.com
+eic.cdpbeacon.lgtvcommon.com
+# lg iot
+eic.lgtviot.com
+eic.api.lgtviot.com
+eic.push.lgtviot.com
+# others
+cdpsvc.lgtvcommon.com
+rdx2.lgtvsdp.com
+smartshare.lgtvsdp.com
+sp.pluto.tv
+tags.tiqcdn.com
+ibs.lgappstv.com
+
+# Philips Hue
+discovery.meethue.com
