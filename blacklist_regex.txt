@@ -2,3 +2,11 @@
 # Add only regex domain name (ex. .*\.cloudfront\.net) for block scam sites
 
 #-----------------------------------------------------------------------------#
+
+# Smart TV (LG)
+# dashboard
+.*\.lgeapi\.com
+.*\.ibsstat\.lgappstv\.com
+# app store
+.*\.lgeapi\.com
+.*\.lgrecommends\.lgappstv\.com

@@ -14,16 +14,13 @@ eic.recommend.lgtvcommon.com
 eic.rdl.lgtvcommon.com
 eic.homeprv.lgtvcommon.com
 eic.nudge.lgtvcommon.com
-region.lgtvsdp.com
 eic.service.lgtvcommon.com
-region.ibsstat.lgappstv.com
 www.ueiwsp.com
 # sports
 eic.sports.lgtviot.com
 # app store
-region.lgeapi.com
-region.lgrecommends.lgappstv.com
 ngfts.lge.com
+qt2-ngfts.lge.com
 # internet channels
 eic.cdplauncher.lgtvcommon.com
 eic.cdpbeacon.lgtvcommon.com
