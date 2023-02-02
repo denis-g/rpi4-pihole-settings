@@ -1,9 +1,7 @@
 # Raspberry Pi and Pi-hole
 
 <div align="center">
-  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/dietpi.png" alt="DietPi" style="width: auto; height: 200px;" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/pihole.svg" alt="Pi-hole" style="width: auto; height: 200px;" />
+  <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/logo.png" alt="DietPi, Pi-hole, Unbound" style="width: 100%;" />
 </div>
 
 ---
@@ -45,32 +43,43 @@ AUTO_SETUP_TIMEZONE=Europe/Warsaw
 # Network options
 AUTO_SETUP_NET_USESTATIC=1
 AUTO_SETUP_NET_STATIC_IP=192.168.0.3
-AUTO_SETUP_NET_STATIC_DNS=1.1.1.1 1.0.0.1
-AUTO_SETUP_DHCP_TO_STATIC=1
 
 # Disable HDMI/video output
 AUTO_SETUP_HEADLESS=1
 
 # Dependency preferences
-# Lighttpd
-AUTO_SETUP_WEB_SERVER_INDEX=-2
+AUTO_SETUP_WEB_SERVER_INDEX=-2  # Lighttpd
+
+# Software to automatically install
+AUTO_SETUP_AUTOMATED=1
+AUTO_SETUP_INSTALL_SOFTWARE_ID=182  # Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87   # SQLite
+
+# DietPi-Survey
+SURVEY_OPTED_IN=0
+
+# Serial Console
+CONFIG_SERIAL_CONSOLE_ENABLE=0  # for correct auto-install
 
 # IPv6
 CONFIG_ENABLE_IPV6=0
 ```
 
-Connect to your berry on the console and wait to auto-install completed.
+Connect to your berry on the console:
 
 ```shell
 ssh root@192.168.0.3
 ```
 
-Use the wizard and set it up. After launching `DietPi-Software` select `Search Software`, find and check:
-- [Pi-hole](https://dietpi.com/docs/software/dns_servers/#pi-hole)
-- [Unbound](https://dietpi.com/docs/software/dns_servers/#unbound)
-- [SQLite](https://dietpi.com/docs/software/databases/#sqlite)
+... and wait `(!)` to auto-install completed.
 
-And select `Install`. After all is completed install `pihole-updatelists`:
+Also needed to install `Pi-hole` (now not support auto-install):
+
+```shell
+dietpi-software install 93
+```
+
+Use wizard and setup. After all is completed install `pihole-updatelists`:
 
 ```shell
 wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
@@ -80,40 +89,44 @@ wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/in
 
 ## 🔹 Configuration
 
-Set your personal lists:
+### Ad-lists
+
+Set your personal ad-lists on config file:
 
 ```shell
-nano /etc/pihole-updatelists.conf
-```
+cat > /etc/pihole-updatelists.conf << EOF
 
-```ini
 ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
 WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
 REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
 BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
 REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
+
+EOF
 ```
 
-Recommended lists:
+Recommended ad-lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
 - [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
 
-Personal lists:
+Personal ad-lists:
 - [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
 - [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
 
-For update lists and rules use:
+### Schedule
+
+Update schedule timer for update ad-lists. For example, `every day at 4am`:
 
 ```shell
-pihole-updatelists
+cat > /etc/cron.d/pihole-updatelists << EOF
+
+0 4 * * *  root  /usr/local/sbin/pihole-updatelists
+
+EOF
 ```
 
-To check domain available and see the lists for a specified domain use:
-
-```shell
-pihole -q example.com
-```
+See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for details.
 
 ---
 
