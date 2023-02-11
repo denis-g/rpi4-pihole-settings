@@ -4,9 +4,6 @@
 #-----------------------------------------------------------------------------#
 
 # Smart TV (LG)
-# dashboard
 .*\.lgeapi\.com
 .*\.ibsstat\.lgappstv\.com
-# app store
-.*\.lgeapi\.com
 .*\.lgrecommends\.lgappstv\.com

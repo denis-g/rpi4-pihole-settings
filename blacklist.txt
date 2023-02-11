@@ -7,34 +7,46 @@
 yastatic.net
 
 # Smart TV (LG)
+ad.lgappstv.com
 ad.lgsmartad.com
-info.lgsmartad.com
-# dashboard
-eic.recommend.lgtvcommon.com
-eic.rdl.lgtvcommon.com
+aic-gfts.lge.com
+aic-ngfts.lge.com
+aic-op-lss.lgthinq.com
+aic.api.lgtviot.com
+aic.homeprv.lgtvcommon.com
+aic.lgtviot.com
+aic.nudge.lgtvcommon.com
+aic.rdl.lgtvcommon.com
+aic.recommend.lgtvcommon.com
+aic.sports.lgtviot.com
+aic.wiseconfig.lgtvcommon.com
+cdpsvc.lgtvcommon.com
+eic.api.lgtviot.com
+eic.cdpbeacon.lgtvcommon.com
+eic.cdplauncher.lgtvcommon.com
 eic.homeprv.lgtvcommon.com
+eic.lgtviot.com
 eic.nudge.lgtvcommon.com
+eic.push.lgtviot.com
+eic.recommend.lgtvcommon.com
 eic.service.lgtvcommon.com
-www.ueiwsp.com
-# sports
+eic.service.lgtvcommon.com
 eic.sports.lgtviot.com
-# app store
+ibs.lgappstv.com
+info.lgsmartad.com
+lgad.cjpowercast.com.edgesuite.net
+lgtvsdp.com
 ngfts.lge.com
 qt2-ngfts.lge.com
-# internet channels
-eic.cdplauncher.lgtvcommon.com
-eic.cdpbeacon.lgtvcommon.com
-# lg iot
-eic.lgtviot.com
-eic.api.lgtviot.com
-eic.push.lgtviot.com
-# others
-cdpsvc.lgtvcommon.com
-rdx2.lgtvsdp.com
+rdl.lgtvcommon.com
+smartclip.com
+smartclip.net
 smartshare.lgtvsdp.com
 sp.pluto.tv
 tags.tiqcdn.com
-ibs.lgappstv.com
+www.ueiwsp.com
 
 # Philips Hue
-discovery.meethue.com
+dc1.philips.com
+diagnostics.meethue.com
+ws.meethue.com
