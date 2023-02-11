@@ -132,31 +132,16 @@ See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for detail
 
 ## 🔹 Finish
 
-Clear all preinstalled Pi-hole lists and rules:
+Clear all preinstalled Pi-hole ad-lists and rules:
 
 ```shell
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE type=0;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE type=1;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE type=2;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE type=3;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist WHERE enabled=0;"  && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist WHERE enabled=1;"
+sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist_by_group;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
 ```
 
-<details><summary>Legend:</summary>
-
-```ini
-domainlist type=0 # whitelist
-domainlist type=1 # blacklist
-domainlist type=2 # regex whitelist
-domainlist type=3 # regex blacklist
-adlist enabled=0  # disabled adlists
-adlist enabled=1  # enabled adlists
-```
-
-</details>
-
-Update, upgrade system, and all packages:
+Update, upgrade system, all packages and ad-lists:
 
 ```shell
 apt update -y && \
