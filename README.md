@@ -147,7 +147,7 @@ Update, upgrade system, all packages and ad-lists:
 dietpi-update 1 && \
 apt update -y && \
 apt upgrade -y && \
-apt dist-upgrade - y && \
+apt dist-upgrade -y && \
 apt autoremove -y --purge && \
 apt autoclean -y && \
 pihole -up && \
