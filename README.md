@@ -144,12 +144,12 @@ sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
 Update, upgrade system, all packages and ad-lists:
 
 ```shell
-dietpi-update 1 && \
-apt update -y && \
-apt upgrade -y && \
-apt dist-upgrade -y && \
-apt autoremove -y --purge && \
-apt autoclean -y && \
+sudo dietpi-update 1 && \
+sudo apt update -y && \
+sudo apt upgrade -y && \
+sudo apt dist-upgrade -y && \
+sudo apt autoremove -y --purge && \
+sudo apt autoclean -y && \
 pihole -up && \
 pihole-updatelists --update && \
 pihole-updatelists && \

@@ -1,6 +1,6 @@
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/ultimate.txt
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/doh-vpn-proxy-bypass.txt
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/nosafesearch.txt
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/dyndns.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nosafesearch.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt
 https://schakal.ru/hosts/alive_hosts.txt
 https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile.txt
