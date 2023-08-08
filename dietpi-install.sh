@@ -10,7 +10,6 @@ COLOR_GREY='\e[90m'
 COLOR_RED='\e[31m'
 COLOR_GREEN='\e[32m'
 COLOR_YELLOW='\e[33m'
-COLOR_CYAN=$(tput setaf 6)
 TEXT_BOLD=$(tput bold)
 TEXT_RESET='\e[0m'
 
@@ -29,7 +28,7 @@ VALIDATION () {
 
 BODY () {
   command=$1
-  echo "${COLOR_GREY}[ Executing ] | ${COLOR_CYAN}${command}${TEXT_RESET}"
+  echo "${COLOR_GREY}[ Executing ] | ${COLOR_YELLOW}${command}${TEXT_RESET}"
   eval $command
   status=$?
   VALIDATION $status $1
