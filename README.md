@@ -85,10 +85,14 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
+# Lighttpd
+AUTO_SETUP_INSTALL_SOFTWARE_ID=84
+# SQLite
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87
+# Pi-hole
+AUTO_SETUP_INSTALL_SOFTWARE_ID=93
 # Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=182
-# SQLite
-AUTO_SETUP_INSTALL_SOFTWARE_ID=8   
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings

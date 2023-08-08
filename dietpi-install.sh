@@ -41,10 +41,8 @@ BODY () {
 
 HEADER "Dependencies Installation"
 
-# install Pi-hole (now not support auto-install)
-BODY "/boot/dietpi/dietpi-software install 93"
-
 # install pihole-updatelists
+BODY "apt-get install php-cli php-sqlite3 php-intl php-curl"
 BODY "wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash"
 
 
@@ -116,18 +114,11 @@ BLACKLIST_URL=\"https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/m
 REGEX_BLACKLIST_URL=\"https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt\"
 EOF"
 
-# update ad-lists and rules
-BODY "pihole-updatelists"
-
-
-# -----------------------------------------------------------------------------
-# Schedule
-# -----------------------------------------------------------------------------
-
-HEADER "Schedule Configuration"
-
 # timer for update ad-lists, ex. every day at 4am
 # https://crontab.guru/#0_4_*_*
 BODY "cat > /etc/cron.d/pihole-updatelists <<EOF
 0 4 * * *  root  /usr/local/sbin/pihole-updatelists
 EOF"
+
+# update ad-lists and rules
+BODY "pihole-updatelists"
