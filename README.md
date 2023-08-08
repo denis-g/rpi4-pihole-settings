@@ -68,7 +68,7 @@ AUTO_SETUP_SWAPFILE_SIZE=0
 AUTO_SETUP_HEADLESS=1
 
 # post-install and configuration
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://github.com/denis-g/rpi4-pihole-settings/blob/master/dietpi-install.sh
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-install.sh
 
 # -----------------------------------------------------------------------------
 # Software options

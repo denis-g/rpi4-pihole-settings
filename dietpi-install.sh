@@ -115,9 +115,9 @@ NORMAL=$(tput sgr0)
 banner () {
   title=`echo $1 | tr 'a-z' 'A-Z'`
   echo ""
-  echo "||"
-  echo "||  Running \"${BOLD}${YELLOW}${title}${NORMAL}\""
-  echo "||"
+  echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
+  echo "${BOLD}${YELLOW}${title}${NORMAL}"
+  echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
   echo ""
 }
 
@@ -125,9 +125,9 @@ check_error () {
   if [ $1 -gt 0 ]; then
     log "Failed in \"${BOLD}${RED}${2}${NORMAL}\""
     echo ""
-    echo "||"
-    echo "||  ${BOLD}${RED}ERROR ${1}${NORMAL}"
-    echo "||"
+    echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
+    echo "${BOLD}${RED}ERROR ${1}${NORMAL}"
+    echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
     echo ""
     exit $1
   fi
