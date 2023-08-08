@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.plus.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nosafesearch.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt
