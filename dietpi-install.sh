@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CONFIG_FILE="/boot/config.txt"
 
@@ -8,7 +8,7 @@ CONFIG_FILE="/boot/config.txt"
 # -----------------------------------------------------------------------------
 
 # install pihole-updatelists
-apt install php-cli php-sqlite3 php-intl php-curl -y
+apt-get install php-cli php-sqlite3 php-intl php-curl -y
 wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
 
 

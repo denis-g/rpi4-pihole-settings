@@ -145,9 +145,9 @@ Update, upgrade system, all packages and ad-lists:
 
 ```shell
 sudo dietpi-update 1 && \
-sudo apt update -y && \
-sudo apt upgrade -y && \
-sudo apt dist-upgrade -y && \
+sudo apt-get update -y && \
+sudo apt-get upgrade -y && \
+sudo apt-get dist-upgrade -y && \
 pihole -up && \
 sudo pihole-updatelists --update && \
 sudo pihole-updatelists && \
