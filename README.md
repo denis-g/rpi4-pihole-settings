@@ -51,10 +51,6 @@ AUTO_SETUP_TIMEZONE=Europe/Warsaw
 # Network options
 # -----------------------------------------------------------------------------
 
-# static network
-AUTO_SETUP_NET_USESTATIC=1
-AUTO_SETUP_NET_STATIC_IP=192.168.0.2
-
 AUTO_SETUP_NET_HOSTNAME=raspberrypi-eth
 
 # -----------------------------------------------------------------------------
@@ -75,7 +71,8 @@ AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://github.com/denis-g/rpi4-pihole-settings/bl
 # -----------------------------------------------------------------------------
 
 # dependency preferences
-AUTO_SETUP_WEB_SERVER_INDEX=-2  # Lighttpd
+# Lighttpd
+AUTO_SETUP_WEB_SERVER_INDEX=-2
 
 # software to automatically install
 AUTO_SETUP_AUTOMATED=1
@@ -84,8 +81,10 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=dietpi
 
 # software to automatically install
-AUTO_SETUP_INSTALL_SOFTWARE_ID=182  # Unbound
-AUTO_SETUP_INSTALL_SOFTWARE_ID=87   # SQLite
+# Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=182
+# SQLite
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87   
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings
@@ -101,11 +100,11 @@ SURVEY_OPTED_IN=0
 # CPU Governor
 CONFIG_CPU_GOVERNOR=powersave
 
-# disable IPv6
-CONFIG_ENABLE_IPV6=0
-
 # for correct auto-install
 CONFIG_SERIAL_CONSOLE_ENABLE=0
+
+# disable IPv6
+CONFIG_ENABLE_IPV6=0
 ```
 
 For additional installation and configuration see `dietpi-install.sh` file.
@@ -115,7 +114,7 @@ For additional installation and configuration see `dietpi-install.sh` file.
 Connect to your berry on the console with global password:
 
 ```shell
-ssh dietpi@192.168.0.2
+ssh root@192.168.0.2
 ```
 
 ... and wait `(!)` to auto-install completed.
