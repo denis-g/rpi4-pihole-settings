@@ -35,7 +35,6 @@ eic.sports.lgtviot.com
 ibs.lgappstv.com
 info.lgsmartad.com
 lgad.cjpowercast.com.edgesuite.net
-lgtvsdp.com
 ngfts.lge.com
 qt2-ngfts.lge.com
 rdl.lgtvcommon.com
@@ -45,8 +44,3 @@ smartshare.lgtvsdp.com
 sp.pluto.tv
 tags.tiqcdn.com
 www.ueiwsp.com
-
-# Philips Hue
-dc1.philips.com
-diagnostics.meethue.com
-ws.meethue.com

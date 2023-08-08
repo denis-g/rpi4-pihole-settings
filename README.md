@@ -145,9 +145,9 @@ wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/in
 ### Ad-lists
 
 Recommended ad-lists:
-- [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
-- [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
+- [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
+- [DNS Blocklists | WhiteList](https://github.com/hagezi/dns-blocklists/blob/main/whitelist.txt), basic whitelist
 
 Personal ad-lists:
 - [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
@@ -158,7 +158,7 @@ Set your personal ad-lists on config file:
 ```shell
 cat > /etc/pihole-updatelists.conf << EOF
 ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
-WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
+WHITELIST_URL="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
 REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
 BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
 REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
