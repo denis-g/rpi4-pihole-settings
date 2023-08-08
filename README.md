@@ -8,8 +8,8 @@
 
 - [Overview](#-overview)
 - [Install](#-install)
-- [Configuration](#-configuration)
-- [Finish](#-finish)
+- [Configuration](#-ad-lists)
+- [Finish](#-update)
 
 ---
 
@@ -33,77 +33,96 @@ Ingredients:
 
 See `DietPi` install guide [here](https://dietpi.com/docs/install/).
 
-After completed flash the SD card open `dietpi.txt` from the card and change basic settings, for example:
+After completed flash the SD card open `dietpi.txt` from the card and change basic settings for auto-configuration.
+
+> ⚠️ This config applied on first boot of DietPi only!
+
+Example modified settings:
 
 ```ini
+# -----------------------------------------------------------------------------
 # Language/Regional options
+# -----------------------------------------------------------------------------
+
 AUTO_SETUP_KEYBOARD_LAYOUT=us
 AUTO_SETUP_TIMEZONE=Europe/Warsaw
 
+# -----------------------------------------------------------------------------
 # Network options
-AUTO_SETUP_NET_USESTATIC=1
-AUTO_SETUP_NET_STATIC_IP=192.168.0.3
+# -----------------------------------------------------------------------------
 
-# Disable HDMI/video output
+# static network
+AUTO_SETUP_NET_USESTATIC=1
+AUTO_SETUP_NET_STATIC_IP=192.168.0.2
+
+AUTO_SETUP_NET_HOSTNAME=raspberrypi-eth
+
+# -----------------------------------------------------------------------------
+# Misc options
+# -----------------------------------------------------------------------------
+
+# disable swap
+AUTO_SETUP_SWAPFILE_SIZE=0
+
+# disable HDMI/video output and framebuffers
 AUTO_SETUP_HEADLESS=1
 
-# Dependency preferences
+# post-install and configuration
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://github.com/denis-g/rpi4-pihole-settings/blob/master/dietpi-install.sh
+
+# -----------------------------------------------------------------------------
+# Software options
+# -----------------------------------------------------------------------------
+
+# dependency preferences
 AUTO_SETUP_WEB_SERVER_INDEX=-2  # Lighttpd
 
-# Software to automatically install
+# software to automatically install
 AUTO_SETUP_AUTOMATED=1
+
+# global password
+AUTO_SETUP_GLOBAL_PASSWORD=dietpi
+
+# software to automatically install
 AUTO_SETUP_INSTALL_SOFTWARE_ID=182  # Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=87   # SQLite
 
-# DietPi-Survey
+# -----------------------------------------------------------------------------
+# Misc DietPi program settings
+# -----------------------------------------------------------------------------
+
+# disable obtain information regarding your system and installed software
 SURVEY_OPTED_IN=0
 
-# Serial Console
-CONFIG_SERIAL_CONSOLE_ENABLE=0  # for correct auto-install
+# -----------------------------------------------------------------------------
+# DietPi-Config settings
+# -----------------------------------------------------------------------------
 
-# IPv6
+# CPU Governor
+CONFIG_CPU_GOVERNOR=powersave
+
+# disable IPv6
 CONFIG_ENABLE_IPV6=0
+
+# for correct auto-install
+CONFIG_SERIAL_CONSOLE_ENABLE=0
 ```
 
-Connect to your berry on the console:
+For additional installation and configuration see `dietpi-install.sh` file.
+
+---
+
+Connect to your berry on the console with global password:
 
 ```shell
-ssh root@192.168.0.3
+ssh dietpi@192.168.0.2
 ```
 
 ... and wait `(!)` to auto-install completed.
 
-Also needed to install `Pi-hole` (now not support auto-install):
-
-```shell
-dietpi-software install 93
-```
-
-Use wizard and setup. After all is completed install `pihole-updatelists`:
-
-```shell
-wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
-```
-
 ---
 
-## 🔹 Configuration
-
-### Ad-lists
-
-Set your personal ad-lists on config file:
-
-```shell
-cat > /etc/pihole-updatelists.conf << EOF
-
-ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
-WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
-REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
-BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
-REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
-
-EOF
-```
+## 🔹 Ad-lists
 
 Recommended ad-lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
@@ -114,32 +133,9 @@ Personal ad-lists:
 - [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
 - [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
 
-### Schedule
-
-Update schedule timer for update ad-lists. For example, `every day at 4am`:
-
-```shell
-cat > /etc/cron.d/pihole-updatelists << EOF
-
-0 4 * * *  root  /usr/local/sbin/pihole-updatelists
-
-EOF
-```
-
-See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for details.
-
 ---
 
-## 🔹 Finish
-
-Clear all preinstalled Pi-hole ad-lists and rules:
-
-```shell
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist_by_group;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist;" && \
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
-```
+## 🔹 Update
 
 Update, upgrade system, all packages and ad-lists:
 
@@ -148,10 +144,8 @@ sudo dietpi-update 1 && \
 sudo apt update -y && \
 sudo apt upgrade -y && \
 sudo apt dist-upgrade -y && \
-sudo apt autoremove -y --purge && \
-sudo apt autoclean -y && \
 pihole -up && \
-pihole-updatelists --update && \
-pihole-updatelists && \
-reboot
+sudo pihole-updatelists --update && \
+sudo pihole-updatelists && \
+sudo reboot
 ```
