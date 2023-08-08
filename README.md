@@ -51,6 +51,10 @@ AUTO_SETUP_TIMEZONE=Europe/Warsaw
 # Network options
 # -----------------------------------------------------------------------------
 
+AUTO_SETUP_NET_USESTATIC=1
+AUTO_SETUP_NET_STATIC_IP=192.168.50.2
+AUTO_SETUP_NET_STATIC_GATEWAY=192.168.50.1
+
 AUTO_SETUP_NET_HOSTNAME=raspberrypi-eth
 
 # -----------------------------------------------------------------------------
@@ -77,14 +81,14 @@ AUTO_SETUP_WEB_SERVER_INDEX=-2
 # software to automatically install
 AUTO_SETUP_AUTOMATED=1
 
-# global password
-AUTO_SETUP_GLOBAL_PASSWORD=dietpi
+# global password [!]
+AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
 # Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=182
 # SQLite
-AUTO_SETUP_INSTALL_SOFTWARE_ID=87   
+AUTO_SETUP_INSTALL_SOFTWARE_ID=8   
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings
@@ -99,9 +103,6 @@ SURVEY_OPTED_IN=0
 
 # CPU Governor
 CONFIG_CPU_GOVERNOR=powersave
-
-# for correct auto-install
-CONFIG_SERIAL_CONSOLE_ENABLE=0
 
 # disable IPv6
 CONFIG_ENABLE_IPV6=0
