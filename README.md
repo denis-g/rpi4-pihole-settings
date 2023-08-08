@@ -7,8 +7,8 @@
 ---
 
 - [Overview](#-overview)
-- [Install](#-install)
-- [Configuration](#-ad-lists)
+- [Install DietPi](#-install-dietpi)
+- [Install Pi-hole](#-install-pi-hole)
 - [Finish](#-update)
 
 ---
@@ -29,7 +29,7 @@ Ingredients:
 
 ---
 
-## 🔹 Install
+## 🔹 Install DietPi
 
 See `DietPi` install guide [here](https://dietpi.com/docs/install/).
 
@@ -89,8 +89,8 @@ AUTO_SETUP_GLOBAL_PASSWORD=password
 AUTO_SETUP_INSTALL_SOFTWARE_ID=84
 # SQLite
 AUTO_SETUP_INSTALL_SOFTWARE_ID=87
-# Pi-hole
-AUTO_SETUP_INSTALL_SOFTWARE_ID=93
+# PHP
+AUTO_SETUP_INSTALL_SOFTWARE_ID=89
 # Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=182
 
@@ -112,21 +112,37 @@ CONFIG_CPU_GOVERNOR=powersave
 CONFIG_ENABLE_IPV6=0
 ```
 
-For additional installation and configuration see `dietpi-install.sh` file.
+> Now `Pi-hole` not support auto-install.
+
+Also for additional configuration see `dietpi-install.sh` file.
 
 ---
 
 Connect to your berry on the console with global password:
 
 ```shell
-ssh root@192.168.0.2
+ssh root@192.168.50.2
 ```
 
-... and wait `(!)` to auto-install completed.
+... and wait `[!]` few minutes to auto-install completed.
 
 ---
 
-## 🔹 Ad-lists
+## 🔹 Install Pi-hole
+
+Run this for execute `Pi-hole` installation wizard:
+
+```shell
+dietpi-software install 93
+```
+
+After all is completed install `pihole-updatelists`:
+
+```shell
+wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
+```
+
+### Ad-lists
 
 Recommended ad-lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
@@ -137,6 +153,45 @@ Personal ad-lists:
 - [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
 - [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
 
+Set your personal ad-lists on config file:
+
+```shell
+cat > /etc/pihole-updatelists.conf << EOF
+ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
+WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
+REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
+BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
+REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
+EOF
+```
+
+Clear all preinstalled Pi-hole ad-lists and rules:
+
+```shell
+sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist_by_group;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist;" && \
+sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
+```
+
+And update ad-lists and rules on `Pi-hole`:
+
+```shell
+pihole-updatelists
+```
+
+### Update Schedule
+
+Set schedule timer for update ad-lists. For example, `every day at 4am`:
+
+```shell
+cat > /etc/cron.d/pihole-updatelists << EOF
+0 4 * * *  root  /usr/local/sbin/pihole-updatelists
+EOF
+```
+
+See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for details.
+
 ---
 
 ## 🔹 Update
@@ -144,12 +199,12 @@ Personal ad-lists:
 Update, upgrade system, all packages and ad-lists:
 
 ```shell
-sudo dietpi-update 1 && \
-sudo apt-get update -y && \
-sudo apt-get upgrade -y && \
-sudo apt-get dist-upgrade -y && \
+dietpi-update 1 && \
+apt-get update -y && \
+apt-get upgrade -y && \
+apt-get dist-upgrade -y && \
 pihole -up && \
-sudo pihole-updatelists --update && \
-sudo pihole-updatelists && \
-sudo reboot
+pihole-updatelists --update && \
+pihole-updatelists && \
+reboot
 ```

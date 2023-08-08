@@ -4,15 +4,6 @@ CONFIG_FILE="/boot/config.txt"
 
 
 # -----------------------------------------------------------------------------
-# Dependencies
-# -----------------------------------------------------------------------------
-
-# install pihole-updatelists
-apt-get install php-cli php-sqlite3 php-intl php-curl -y
-wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
-
-
-# -----------------------------------------------------------------------------
 # Hardware
 # -----------------------------------------------------------------------------
 
@@ -53,32 +44,3 @@ sed -i "/^temp_limit=/c\temp_limit=65" $CONFIG_FILE
 # ARM Idle Frequency - 300 Mhz
 sed -i "/^#arm_freq_min=/c\arm_freq_min=300" $CONFIG_FILE
 sed -i "/^arm_freq_min=/c\arm_freq_min=300" $CONFIG_FILE
-
-
-# -----------------------------------------------------------------------------
-# Pi-hole
-# -----------------------------------------------------------------------------
-
-# clear all preinstalled Pi-hole ad-lists and rules
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist;"
-sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist_by_group;"
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist;"
-sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
-
-# set new ad-lists and rules
-cat << '_EOF_' > "/etc/pihole-updatelists.conf"
-ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
-WHITELIST_URL="https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
-REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
-BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
-REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
-_EOF_
-
-# timer for update ad-lists, ex. every day at 4am
-# https://crontab.guru/#0_4_*_*
-cat << '_EOF_' > "/etc/cron.d/pihole-updatelists"
-0 4 * * *  root  /usr/local/sbin/pihole-updatelists
-_EOF_
-
-# update ad-lists and rules
-pihole-updatelists
