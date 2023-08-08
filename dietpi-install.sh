@@ -1,81 +1,115 @@
 #!/bin/bash
 
-CONFIG="/boot/config.txt"
-
 # -----------------------------------------------------------------------------
-# Hardware
+# Helpers
 # -----------------------------------------------------------------------------
 
-banner "Hardware configuration..."
+CONFIG_FILE="/boot/config.txt"
 
-# disable wireless
-exec "/boot/dietpi/func/dietpi-set_hardware bluetooth disable"
-exec "/boot/dietpi/func/dietpi-set_hardware wifimodules onboard_disable"
+COLOR_GREY='\e[90m'
+COLOR_RED='\e[31m'
+COLOR_GREEN='\e[32m'
+COLOR_YELLOW='\e[33m'
+COLOR_CYAN=$(tput setaf 6)
+TEXT_BOLD=$(tput bold)
+TEXT_RESET='\e[0m'
 
-# disable buses
-exec "/boot/dietpi/func/dietpi-set_hardware i2c disable"
-exec "/boot/dietpi/func/dietpi-set_hardware spi disable"
+HEADER () {
+  echo "${COLOR_GREEN}─────────────────────────────────────────────────────${TEXT_RESET}"
+  echo "${COLOR_GREY}Post-Install : ${TEXT_BOLD}${COLOR_YELLOW}${1}${TEXT_RESET}"
+  echo "${COLOR_GREEN}─────────────────────────────────────────────────────${TEXT_RESET}"
+}
 
-# disable HDMI/video output
-exec "/boot/dietpi/func/dietpi-set_hardware headless enable"
+VALIDATION () {
+  if [ $1 -gt 0 ]; then
+    echo "${COLOR_GREY}Error message : ${TEXT_BOLD}${COLOR_RED}${1}${TEXT_RESET}"
+    exit $1
+  fi
+}
 
-# disable modules
-exec "/boot/dietpi/func/dietpi-set_hardware rpi-camera disable"
-exec "/boot/dietpi/func/dietpi-set_hardware rpi-codec disable"
-exec "/boot/dietpi/func/dietpi-set_hardware rpi-opengl disable"
-
-# disable IPv6
-exec "/boot/dietpi/func/dietpi-set_hardware enableipv6 disable"
-
-
-# -----------------------------------------------------------------------------
-# Overclock
-# -----------------------------------------------------------------------------
-
-banner "Overclock configuration..."
-
-# Profile - `energy saving`
-exec "sed -i \"/^#over_voltage=/c\over_voltage=-2\" $CONFIG"
-exec "sed -i \"/^over_voltage=/c\over_voltage=-2\" $CONFIG"
-exec "sed -i \"/^#over_voltage_min=/c\over_voltage_min=-2\" $CONFIG"
-exec "sed -i \"/^over_voltage_min=/c\over_voltage_min=-2\" $CONFIG"
-
-# ARM Temp Limit - 65'C
-exec "sed -i \"/^#temp_limit=/c\temp_limit=65\" $CONFIG"
-exec "sed -i \"/^temp_limit=/c\temp_limit=65\" $CONFIG"
-
-# ARM Idle Frequency - 300 Mhz
-exec "sed -i \"/^#arm_freq_min=/c\arm_freq_min=300\" $CONFIG"
-exec "sed -i \"/^arm_freq_min=/c\arm_freq_min=300\" $CONFIG"
+BODY () {
+  command=$1
+  echo "${COLOR_GREY}[ Executing ] | ${COLOR_CYAN}${command}${TEXT_RESET}"
+  eval $command
+  status=$?
+  VALIDATION $status $1
+}
 
 
 # -----------------------------------------------------------------------------
 # Dependencies
 # -----------------------------------------------------------------------------
 
-banner "Dependencies installation..."
+HEADER "Dependencies Installation"
 
 # install Pi-hole (now not support auto-install)
-exec "dietpi-software install 93"
+BODY "/boot/dietpi/dietpi-software install 93"
 
 # install pihole-updatelists
-exec "wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash"
+BODY "wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash"
+
+
+# -----------------------------------------------------------------------------
+# Hardware
+# -----------------------------------------------------------------------------
+
+HEADER "Hardware Configuration"
+
+# disable wireless
+BODY "/boot/dietpi/func/dietpi-set_hardware bluetooth disable"
+BODY "/boot/dietpi/func/dietpi-set_hardware wifimodules onboard_disable"
+
+# disable buses
+BODY "/boot/dietpi/func/dietpi-set_hardware i2c disable"
+BODY "/boot/dietpi/func/dietpi-set_hardware spi disable"
+
+# disable HDMI/video output
+BODY "/boot/dietpi/func/dietpi-set_hardware headless enable"
+
+# disable modules
+BODY "/boot/dietpi/func/dietpi-set_hardware rpi-camera disable"
+BODY "/boot/dietpi/func/dietpi-set_hardware rpi-codec disable"
+BODY "/boot/dietpi/func/dietpi-set_hardware rpi-opengl disable"
+
+# disable IPv6
+BODY "/boot/dietpi/func/dietpi-set_hardware enableipv6 disable"
+
+
+# -----------------------------------------------------------------------------
+# Overclock
+# -----------------------------------------------------------------------------
+
+HEADER "Overclock Configuration"
+
+# Profile - `energy saving`
+BODY "sed -i \"/^#over_voltage=/c\over_voltage=-2\" $CONFIG_FILE"
+BODY "sed -i \"/^over_voltage=/c\over_voltage=-2\" $CONFIG_FILE"
+BODY "sed -i \"/^#over_voltage_min=/c\over_voltage_min=-2\" $CONFIG_FILE"
+BODY "sed -i \"/^over_voltage_min=/c\over_voltage_min=-2\" $CONFIG_FILE"
+
+# ARM Temp Limit - 65'C
+BODY "sed -i \"/^#temp_limit=/c\temp_limit=65\" $CONFIG_FILE"
+BODY "sed -i \"/^temp_limit=/c\temp_limit=65\" $CONFIG_FILE"
+
+# ARM Idle Frequency - 300 Mhz
+BODY "sed -i \"/^#arm_freq_min=/c\arm_freq_min=300\" $CONFIG_FILE"
+BODY "sed -i \"/^arm_freq_min=/c\arm_freq_min=300\" $CONFIG_FILE"
 
 
 # -----------------------------------------------------------------------------
 # Pi-hole
 # -----------------------------------------------------------------------------
 
-banner "Pi-hole configuration..."
+HEADER "Pi-hole Configuration"
 
 # clear all preinstalled Pi-hole ad-lists and rules
-exec "sqlite3 /etc/pihole/gravity.db \"DELETE FROM adlist;\""
-exec "sqlite3 /etc/pihole/gravity.db \"DELETE FROM adlist_by_group;\""
-exec "sqlite3 /etc/pihole/gravity.db \"DELETE FROM domainlist;\""
-exec "sqlite3 /etc/pihole/gravity.db \"DELETE FROM domainlist_by_group;\""
+BODY "sqlite3 /etc/pihole/gravity.db \"DELETE FROM adlist;\""
+BODY "sqlite3 /etc/pihole/gravity.db \"DELETE FROM adlist_by_group;\""
+BODY "sqlite3 /etc/pihole/gravity.db \"DELETE FROM domainlist;\""
+BODY "sqlite3 /etc/pihole/gravity.db \"DELETE FROM domainlist_by_group;\""
 
 # set new ad-lists and rules
-exec "cat > /etc/pihole-updatelists.conf <<EOF
+BODY "cat > /etc/pihole-updatelists.conf <<EOF
 ADLISTS_URL=\"https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt\"
 WHITELIST_URL=\"https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt\"
 REGEX_WHITELIST_URL=\"https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt\"
@@ -84,63 +118,17 @@ REGEX_BLACKLIST_URL=\"https://raw.githubusercontent.com/mmotti/pihole-regex/mast
 EOF"
 
 # update ad-lists and rules
-exec "pihole-updatelists"
+BODY "pihole-updatelists"
 
 
 # -----------------------------------------------------------------------------
 # Schedule
 # -----------------------------------------------------------------------------
 
-banner "Schedule configuration..."
+HEADER "Schedule Configuration"
 
 # timer for update ad-lists, ex. every day at 4am
 # https://crontab.guru/#0_4_*_*
-exec "cat > /etc/cron.d/pihole-updatelists <<EOF
+BODY "cat > /etc/cron.d/pihole-updatelists <<EOF
 0 4 * * *  root  /usr/local/sbin/pihole-updatelists
 EOF"
-
-
-# -----------------------------------------------------------------------------
-# Helpers
-# -----------------------------------------------------------------------------
-
-RED=$(tput setaf 1)
-GREEN=$(tput setaf 2)
-YELLOW=$(tput setaf 3)
-CYAN=$(tput setaf 6)
-WHITE=$(tput setaf 7)
-BOLD=$(tput bold)
-NORMAL=$(tput sgr0)
-
-banner () {
-  title=`echo $1 | tr 'a-z' 'A-Z'`
-  echo ""
-  echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
-  echo "${BOLD}${YELLOW}${title}${NORMAL}"
-  echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
-  echo ""
-}
-
-check_error () {
-  if [ $1 -gt 0 ]; then
-    log "Failed in \"${BOLD}${RED}${2}${NORMAL}\""
-    echo ""
-    echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
-    echo "${BOLD}${RED}ERROR ${1}${NORMAL}"
-    echo "${GREEN}─────────────────────────────────────────────────────${NORMAL}"
-    echo ""
-    exit $1
-  fi
-}
-
-log () {
-  echo "--> $1"
-}
-
-body () {
-  command=$1
-  log "Executing \"${CYAN}${command}${NORMAL}\""
-  eval $command
-  status=$?
-  check_error $status $1
-}
