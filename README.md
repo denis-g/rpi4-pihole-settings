@@ -9,7 +9,7 @@
 - [Overview](#-overview)
 - [Install DietPi](#-install-dietpi)
 - [Install Pi-hole](#-install-pi-hole)
-- [Finish](#-update)
+- [Update](#-update)
 
 ---
 

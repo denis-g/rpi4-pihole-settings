@@ -5,3 +5,47 @@
 
 # Ad
 yastatic.net
+
+# Smart TV (LG)
+ad.lgappstv.com
+ad.lgsmartad.com
+aic-gfts.lge.com
+aic-ngfts.lge.com
+aic-op-lss.lgthinq.com
+aic.api.lgtviot.com
+aic.homeprv.lgtvcommon.com
+aic.lgtviot.com
+aic.nudge.lgtvcommon.com
+aic.rdl.lgtvcommon.com
+aic.recommend.lgtvcommon.com
+aic.sports.lgtviot.com
+aic.wiseconfig.lgtvcommon.com
+cdpsvc.lgtvcommon.com
+eic.api.lgtviot.com
+eic.cdpbeacon.lgtvcommon.com
+eic.cdplauncher.lgtvcommon.com
+eic.homeprv.lgtvcommon.com
+eic.lgtviot.com
+eic.nudge.lgtvcommon.com
+eic.push.lgtviot.com
+eic.recommend.lgtvcommon.com
+eic.service.lgtvcommon.com
+eic.service.lgtvcommon.com
+eic.sports.lgtviot.com
+ibs.lgappstv.com
+info.lgsmartad.com
+lgad.cjpowercast.com.edgesuite.net
+ngfts.lge.com
+qt2-ngfts.lge.com
+rdl.lgtvcommon.com
+smartclip.com
+smartclip.net
+smartshare.lgtvsdp.com
+sp.pluto.tv
+tags.tiqcdn.com
+www.ueiwsp.com
+
+# Philips Hue
+dc1.philips.com
+diagnostics.meethue.com
+ws.meethue.com
