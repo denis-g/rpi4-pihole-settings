@@ -18,3 +18,7 @@ uat-ubiservices.data.ubi.com
 
 # EA
 pin-river.data.ea.com
+
+# DEVS
+# https://github.com/hagezi/dns-blocklists/issues/1415
+crontab.guru
