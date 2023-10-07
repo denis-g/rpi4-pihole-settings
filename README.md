@@ -145,7 +145,7 @@ wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/in
 ### Ad-lists
 
 Recommended ad-lists:
-- [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/usedsources.md)
+- [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/sources.md)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
 - [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
 
