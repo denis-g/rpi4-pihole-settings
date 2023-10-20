@@ -150,8 +150,9 @@ Recommended ad-lists:
 - [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
 
 Personal ad-lists:
-- [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish Filters
-- [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), RU-adlist
+- [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish filters
+- [KADhosts](https://github.com/FiltersHeroes/KADhosts), Polish filters
+- [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), Russian filters
 
 Set your personal ad-lists on config file:
 
