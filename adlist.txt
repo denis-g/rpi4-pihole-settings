@@ -3,6 +3,6 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nosafesearc
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds-adblock.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/gambling.txt
-https://schakal.ru/hosts/alive_hosts.txt
+https://schakal.ru/hosts/alive_hosts_mail_fb.txt
 https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile.txt
 https://raw.githubusercontent.com/FiltersHeroes/KADhosts/master/KADhosts.txt
