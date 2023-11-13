@@ -4,20 +4,11 @@
 #-----------------------------------------------------------------------------#
 
 # META
-graph.facebook.com
 graph.instagram.com
-graph.oculus.com
 
 # XBOX
 v10.events.data.microsoft.com
-v20.events.data.microsoft.com
-
-# UBISOFT
-ubiservices.data.ubi.com
-uat-ubiservices.data.ubi.com
-
-# EA
-pin-river.data.ea.com
+us-v10.events.data.microsoft.com
 
 # DEVS
 # https://github.com/hagezi/dns-blocklists/issues/1415

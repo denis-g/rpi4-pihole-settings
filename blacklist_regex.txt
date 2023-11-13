@@ -4,11 +4,5 @@
 #-----------------------------------------------------------------------------#
 
 # Smart TV (LG)
-.*\.lgtvsdp\.com
-.*\.lgeapi\.com
 .*\.ibsstat\.lgappstv\.com
 .*\.lgrecommends\.lgappstv\.com
-
-
-# Philips Hue
-.*\.dc1\.philips\.com
