@@ -147,20 +147,13 @@ wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/in
 Recommended ad-lists:
 - [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/sources.md)
 - [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
-- [DNS Blocklists/Whitelist](https://github.com/hagezi/dns-blocklists), main whitelist
-- [Commonly White List](https://github.com/anudeepND/whitelist), basic whitelist
-
-Personal ad-lists:
-- [MajkiIT/polish-ads-filter](https://github.com/MajkiIT/polish-ads-filter), Polish filters
-- [KADhosts](https://github.com/FiltersHeroes/KADhosts), Polish filters
-- [Schakal Hosts](https://4pda.to/forum/index.php?showtopic=275091&st=8000#Spoil-89665467-4), Russian filters
 
 Set your personal ad-lists on config file:
 
 ```shell
 cat > /etc/pihole-updatelists.conf << EOF
 ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
-WHITELIST_URL="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/whitelist.txt https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt https://raw.githubusercontent.com/im-sm/Pi-hole-Torrent-Blocklist/main/all-torrent-trackres.txt"
+WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
 REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
 BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
 REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"

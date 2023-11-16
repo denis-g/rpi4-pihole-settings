@@ -3,13 +3,6 @@
 
 #-----------------------------------------------------------------------------#
 
-# META
-graph.instagram.com
-
-# XBOX
-v10.events.data.microsoft.com
-us-v10.events.data.microsoft.com
-
 # DEVS
 # https://github.com/hagezi/dns-blocklists/issues/1415
 crontab.guru

@@ -2,6 +2,3 @@
 # Add only regex domain name (ex. .*\.cloudfront\.net) for fix broken sites
 
 #-----------------------------------------------------------------------------#
-
-# TORRENTS
-.*\.rutracker\.cc
