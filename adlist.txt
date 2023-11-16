@@ -1,5 +1,15 @@
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.plus.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-proxy-bypass.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/nosafesearch.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds-adblock.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/gambling.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huawei.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.winoffice.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.lgwebos.txt
