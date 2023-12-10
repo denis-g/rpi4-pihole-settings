@@ -13,3 +13,4 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.huaw
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.winoffice.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.tiktok.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.lgwebos.txt
+https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile.txt
