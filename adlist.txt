@@ -6,7 +6,6 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh-vpn-pro
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/dyndns.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/hoster.txt
-https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds-adblock.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/gambling.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.amazon.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/native.apple.txt
