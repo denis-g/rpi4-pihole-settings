@@ -85,6 +85,8 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
+# Git
+AUTO_SETUP_INSTALL_SOFTWARE_ID=17
 # Lighttpd
 AUTO_SETUP_INSTALL_SOFTWARE_ID=84
 # SQLite
@@ -134,6 +136,12 @@ Run this for execute `Pi-hole` installation wizard:
 
 ```shell
 dietpi-software install 93
+```
+
+Set custom DNS server (Unbound):
+
+```shell
+127.0.0.1#5335
 ```
 
 After all is completed install `pihole-updatelists`:
