@@ -3,6 +3,10 @@
 
 #-----------------------------------------------------------------------------#
 
-# DEVS
-# https://github.com/hagezi/dns-blocklists/issues/1415
+# Devs
+## https://github.com/hagezi/dns-blocklists/issues/1415
 crontab.guru
+
+# Shopping
+## paypo.pl
+clk.tradedoubler.com

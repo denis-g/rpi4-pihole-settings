@@ -3,17 +3,19 @@
 
 #-----------------------------------------------------------------------------#
 
-# Ad
+# Ads
+## Yandex
 yastatic.net
 
-# Smart TV (LG)
-## GFN
+# Smart TV
+## LG
 ngfts.lge.com
 aic-gfts.lge.com
+eic-gfts.lge.com
+aic-ngfts.lge.com
 qt2-ngfts.lge.com
-## Sports
 aic.sports.lgtviot.com
 eic.sports.lgtviot.com
-## Recommendations
 aic.recommend.lgtvcommon.com
 eic.recommend.lgtvcommon.com
+eic.wiseconfig.lgtvcommon.com
