@@ -1,7 +1,0 @@
-# WHITELIST REGEX
-# Add only regex domain name (ex. .*\.cloudfront\.net) for fix broken sites
-
-#-----------------------------------------------------------------------------#
-
-# Hosting
-.*\.cloudwaysapps\.com

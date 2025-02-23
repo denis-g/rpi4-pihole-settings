@@ -1,4 +1,4 @@
-# Raspberry Pi and Pi-hole
+# Raspberry Pi and Pi-Hole
 
 <div align="center">
   <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/logo.png" alt="DietPi, Pi-hole, Unbound" style="width: 100%;" />
@@ -8,22 +8,22 @@
 
 - [Overview](#-overview)
 - [Install DietPi](#-install-dietpi)
-- [Install Pi-hole](#-install-pi-hole)
+- [Prepare Pi-Hole](#-prepare-pi-hole)
 - [Update](#-update)
 
 ---
 
 ## 🔹 Overview
 
-Basic Raspberry Pi 4 on DietPi with Pi-hole and Unbound for more privacy.
+Basic Raspberry Pi on DietPi with Pi-Hole and Unbound for more privacy.
 
 Ingredients:
 
 > **[DietPi](https://github.com/MichaIng/DietPi)**: DietPi is an extremely lightweight Debian-based OS. It is highly optimised for minimal CPU and RAM resource usage, ensuring your SBC always runs at its maximum potential.
 
-> **[Pi-hole](https://docs.pi-hole.net/)**: Pi-hole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software.
+> **[Pi-Hole](https://docs.pi-hole.net/)**: Pi-Hole is a DNS sinkhole that protects your devices from unwanted content without installing any client-side software.
 
-> **[pihole-updatelists](https://github.com/jacklul/pihole-updatelists)**: Update Pi-hole's lists from remote sources.
+> **[pihole-updatelists](https://github.com/jacklul/pihole-updatelists)**: Update Pi-Hole's lists from remote sources.
 
 > **[Unbound](https://unbound.docs.nlnetlabs.nl/en/latest/)**: Unbound is a validating, recursive, caching DNS resolver. It is designed to be fast and lean and incorporates modern features based on open standards.
 
@@ -37,7 +37,7 @@ After completed flash the SD card open `dietpi.txt` from the card and change bas
 
 > ⚠️ This config applied on first boot of DietPi only!
 
-Example modified settings:
+Modified settings example:
 
 ```ini
 # -----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ AUTO_SETUP_TIMEZONE=Europe/Warsaw
 # -----------------------------------------------------------------------------
 
 AUTO_SETUP_NET_USESTATIC=1
-AUTO_SETUP_NET_STATIC_IP=192.168.50.2
+AUTO_SETUP_NET_STATIC_IP=192.168.50.5
 AUTO_SETUP_NET_STATIC_GATEWAY=192.168.50.1
 
 AUTO_SETUP_NET_HOSTNAME=raspberrypi-eth
@@ -68,15 +68,11 @@ AUTO_SETUP_SWAPFILE_SIZE=0
 AUTO_SETUP_HEADLESS=1
 
 # post-install and configuration
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-install.sh
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-postinstall.sh
 
 # -----------------------------------------------------------------------------
 # Software options
 # -----------------------------------------------------------------------------
-
-# dependency preferences
-# Lighttpd
-AUTO_SETUP_WEB_SERVER_INDEX=-2
 
 # software to automatically install
 AUTO_SETUP_AUTOMATED=1
@@ -85,16 +81,8 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
-# Git
-AUTO_SETUP_INSTALL_SOFTWARE_ID=17
-# Lighttpd
-AUTO_SETUP_INSTALL_SOFTWARE_ID=84
-# SQLite
-AUTO_SETUP_INSTALL_SOFTWARE_ID=87
-# PHP
-AUTO_SETUP_INSTALL_SOFTWARE_ID=89
-# Unbound
-AUTO_SETUP_INSTALL_SOFTWARE_ID=182
+# SQLite, Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87 182
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings
@@ -114,25 +102,25 @@ CONFIG_CPU_GOVERNOR=powersave
 CONFIG_ENABLE_IPV6=0
 ```
 
-> Now `Pi-hole` not support auto-install.
+> Currently, Pi-Hole doesn't support auto-install.
 
-Also for additional configuration see `dietpi-install.sh` file.
+Also for additional configuration see [dietpi-install.sh](https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-postinstall.sh) file.
 
 ---
 
 Connect to your berry on the console with global password:
 
 ```shell
-ssh root@192.168.50.2
+ssh root@192.168.50.5
 ```
 
-... and wait `[!]` few minutes to auto-install completed.
+... and wait `[!]` few minutes to install and update completed.
 
 ---
 
-## 🔹 Install Pi-hole
+## 🔹 Prepare Pi-Hole
 
-Run this for execute `Pi-hole` installation wizard:
+Run this for execute Pi-Hole installation wizard:
 
 ```shell
 dietpi-software install 93
@@ -144,31 +132,39 @@ Set custom DNS server (Unbound):
 127.0.0.1#5335
 ```
 
-After all is completed install `pihole-updatelists`:
+After all is completed – update Pi-Hole settings by default:
 
 ```shell
-wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
+pihole-FTL --config database.maxDBdays 91
 ```
 
-### Ad-lists
+And install `pihole-updatelists` for import and auto-update lists and rules:
 
-Recommended ad-lists:
-- [DNS Blocklists](https://github.com/hagezi/dns-blocklists), see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/sources.md)
-- [Regex Filters for Pi-hole](https://github.com/mmotti/pihole-regex), basic blacklist regex
+```shell
+apt-get install php-cli php-sqlite3 php-intl php-curl -y
+wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/develop/install.sh | sudo bash
+```
 
-Set your personal ad-lists on config file:
+### Block Lists And Rules
+
+Recommended block lists and rules repositories:
+- [DNS Blocklists](https://github.com/hagezi/dns-blocklists) – see [included source lists](https://github.com/hagezi/dns-blocklists/blob/main/sources.md)
+- [Regex Filters for Pi-Hole](https://github.com/mmotti/pihole-regex) – basic blacklist regex
+
+Set your personal lists on config file:
 
 ```shell
 cat > /etc/pihole-updatelists.conf << EOF
-ADLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/adlist.txt"
-WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist.txt"
-REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/whitelist_regex.txt"
-BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist.txt"
-REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
+BLOCKLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blocklists.txt"
+ALLOWLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/allowlists.txt"
+WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/whitelist.txt"
+REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/whitelist_regex.txt"
+BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blacklist.txt"
+REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
 EOF
 ```
 
-Clear all preinstalled Pi-hole ad-lists and rules:
+Clear all preinstalled Pi-Hole lists and rules:
 
 ```shell
 sqlite3 /etc/pihole/gravity.db "DELETE FROM adlist;" && \
@@ -177,15 +173,15 @@ sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist;" && \
 sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist_by_group;"
 ```
 
-And update ad-lists and rules on `Pi-hole`:
+And update lists and rules on `Pi-Hole`:
 
 ```shell
 pihole-updatelists
 ```
 
-### Update Schedule
+### Schedule
 
-Set schedule timer for update ad-lists. For example, `every day at 4am`:
+Set schedule timer for update all lists. For example, `every day at 4am`:
 
 ```shell
 cat > /etc/cron.d/pihole-updatelists << EOF
@@ -199,15 +195,14 @@ See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for detail
 
 ## 🔹 Update
 
-Update, upgrade system, all packages and ad-lists:
+Update, upgrade system, all packages, lists and rules:
 
 ```shell
+pihole-updatelists --update && \
+pihole-updatelists && \
+pihole -up && \
 dietpi-update 1 && \
 apt-get update -y && \
 apt-get upgrade -y && \
-apt-get dist-upgrade -y && \
-pihole -up && \
-pihole-updatelists --update && \
-pihole-updatelists && \
-reboot
+apt-get dist-upgrade -y
 ```

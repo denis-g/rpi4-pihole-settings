@@ -1,4 +1,4 @@
 # BLACKLIST REGEX
-# Add only regex domain name (ex. .*\.cloudfront\.net) for block scam sites
+# Add only regex domain name (ex. .*\.cloudfront\.net)
 
 #-----------------------------------------------------------------------------#
