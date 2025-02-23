@@ -81,8 +81,12 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
-# SQLite, Unbound
-AUTO_SETUP_INSTALL_SOFTWARE_ID=87 182
+# Git
+AUTO_SETUP_INSTALL_SOFTWARE_ID=17
+# SQLite, PHP
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87 89
+# Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=182
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings
@@ -102,8 +106,6 @@ CONFIG_CPU_GOVERNOR=powersave
 CONFIG_ENABLE_IPV6=0
 ```
 
-> Currently, Pi-Hole doesn't support auto-install.
-
 Also for additional configuration see [dietpi-install.sh](https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-postinstall.sh) file.
 
 ---
@@ -120,15 +122,17 @@ ssh root@192.168.50.5
 
 ## 🔹 Prepare Pi-Hole
 
+> Currently, Pi-Hole doesn't support auto-install.
+
 Run this for execute Pi-Hole installation wizard:
 
 ```shell
 dietpi-software install 93
 ```
 
-Set custom DNS server (Unbound):
+Setup and set custom DNS server (Unbound):
 
-```shell
+```ini
 127.0.0.1#5335
 ```
 
@@ -141,7 +145,6 @@ pihole-FTL --config database.maxDBdays 91
 And install `pihole-updatelists` for import and auto-update lists and rules:
 
 ```shell
-apt-get install php-cli php-sqlite3 php-intl php-curl -y
 wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/develop/install.sh | sudo bash
 ```
 
