@@ -9,13 +9,25 @@ yastatic.net
 
 # Smart TV
 ## LG
-ngfts.lge.com
+aic.cdpsvc.lgtvcommon.com
+eic.cdpsvc.lgtvcommon.com
+aic.recommend.lgtvcommon.com
+eic.recommend.lgtvcommon.com
+aic.sports.lgtviot.com
+eic.sports.lgtviot.com
+aic.homeprv.lgtvcommon.com
+eic.homeprv.lgtvcommon.com
+aic.rdl.lgtvcommon.com
+eic.rdl.lgtvcommon.com
+aic.lgtviot.com
+eic.lgtviot.com
+aic.nudge.lgtvcommon.com
+eic.nudge.lgtvcommon.com
 aic-gfts.lge.com
 eic-gfts.lge.com
 aic-ngfts.lge.com
+eic-ngfts.lge.com
 qt2-ngfts.lge.com
-aic.sports.lgtviot.com
-eic.sports.lgtviot.com
-aic.recommend.lgtvcommon.com
-eic.recommend.lgtvcommon.com
+aic.wiseconfig.lgtvcommon.com
 eic.wiseconfig.lgtvcommon.com
+ngfts.lge.com
