@@ -145,7 +145,7 @@ pihole-FTL --config database.maxDBdays 91
 And install `pihole-updatelists` for import and auto-update lists and rules:
 
 ```shell
-wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/develop/install.sh | sudo bash
+wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
 ```
 
 ### Block Lists And Rules
@@ -201,7 +201,7 @@ See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for detail
 Update, upgrade system, all packages, lists and rules:
 
 ```shell
-pihole-updatelists --update && \
+pihole-updatelists --update -y && \
 pihole-updatelists && \
 pihole -up && \
 dietpi-update 1 && \
