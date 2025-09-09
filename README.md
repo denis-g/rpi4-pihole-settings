@@ -81,12 +81,8 @@ AUTO_SETUP_AUTOMATED=1
 AUTO_SETUP_GLOBAL_PASSWORD=password
 
 # software to automatically install
-# Git
-AUTO_SETUP_INSTALL_SOFTWARE_ID=17
-# SQLite, PHP
-AUTO_SETUP_INSTALL_SOFTWARE_ID=87 89
-# Unbound
-AUTO_SETUP_INSTALL_SOFTWARE_ID=182
+# Git, SQLite, PHP, Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=17 87 89 182
 
 # -----------------------------------------------------------------------------
 # Misc DietPi program settings
@@ -184,28 +180,32 @@ pihole-updatelists
 
 ### Schedule
 
-Set schedule timer for update all lists. For example, `every day at 4am`:
+Set schedule timer for update all lists. For example, `every day`:
 
 ```shell
-cat > /etc/cron.d/pihole-updatelists << EOF
-0 4 * * *  root  /usr/local/sbin/pihole-updatelists
+cat > /etc/cron.daily/pihole-updatelists << EOF
+#!/bin/sh
+
+/usr/local/sbin/pihole-updatelists
 EOF
+
+chmod 755 /etc/cron.daily/pihole-updatelists
 ```
 
-See [cron schedule expressions editor](https://crontab.guru/#0_4_*_*) for details.
+See [dietpi-cron](https://dietpi.com/docs/dietpi_tools/system_configuration/#dietpi-cron) tools for details.
 
 ---
 
 ## 🔹 Update
 
-Update, upgrade system, all packages, lists and rules:
+Update, upgrade system and all packages via [Shell Functions](https://dietpi.com/docs/dietpi_tools/misc_tools/#useful-dietpi-shell-functions), DietPi and Pi-Hole:
 
 ```shell
+G_AGUP && \
+G_AGUG && \
+G_AGDUG && \
 pihole-updatelists --update -y && \
-pihole-updatelists && \
 pihole -up && \
 dietpi-update 1 && \
-apt-get update -y && \
-apt-get upgrade -y && \
-apt-get dist-upgrade -y
+dietpi-cleaner 2
 ```
