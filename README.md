@@ -8,6 +8,7 @@
 
 - [Overview](#-overview)
 - [Install DietPi](#-install-dietpi)
+- [Activating DoT](#-activating-dot)
 - [Prepare Pi-Hole](#-prepare-pi-hole)
 - [Update](#-update)
 
@@ -40,6 +41,9 @@ After completed flash the SD card open `dietpi.txt` from the card and change bas
 Modified settings example:
 
 ```ini
+# global password [!]
+AUTO_SETUP_GLOBAL_PASSWORD=password
+
 # -----------------------------------------------------------------------------
 # Language/Regional options
 # -----------------------------------------------------------------------------
@@ -77,9 +81,6 @@ AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/denis-g/rpi4-pih
 # software to automatically install
 AUTO_SETUP_AUTOMATED=1
 
-# global password [!]
-AUTO_SETUP_GLOBAL_PASSWORD=password
-
 # software to automatically install
 # Git, SQLite, PHP, Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=17 87 89 182
@@ -116,6 +117,29 @@ ssh root@192.168.50.5
 
 ---
 
+## 🔹 Activating DoT
+
+```shell
+cat << '_EOF_' > /etc/unbound/unbound.conf.d/dietpi-dot.conf
+# Adding DNS-over-TLS support
+server:
+tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+forward-zone:
+name: "."
+forward-tls-upstream: yes
+## Cloudflare
+forward-addr: 1.1.1.1@853#cloudflare-dns.com
+forward-addr: 1.0.0.1@853#cloudflare-dns.com
+## Quad9
+forward-addr: 9.9.9.9@853#dns.quad9.net
+forward-addr: 149.112.112.112@853#dns.quad9.net
+_EOF_
+```
+
+More details on [documentation](https://dietpi.com/docs/software/dns_servers/#unbound-activating-dns-over-tls-dot).
+
+---
+
 ## 🔹 Prepare Pi-Hole
 
 > Currently, Pi-Hole doesn't support auto-install.
@@ -135,7 +159,13 @@ Setup and set custom DNS server (Unbound):
 After all is completed – update Pi-Hole settings by default:
 
 ```shell
+# settings for local network
 pihole-FTL --config database.maxDBdays 91
+pihole-FTL --config dns.rateLimit.count "0"
+pihole-FTL --config dns.rateLimit.interval "0"
+# disable IPv6 support
+pihole-FTL --config ntp.ipv6.active false
+pihole-FTL --config resolver.resolveIPv6 false
 ```
 
 And install `pihole-updatelists` for import and auto-update lists and rules:
@@ -207,5 +237,5 @@ G_AGDUG && \
 pihole-updatelists --update -y && \
 pihole -up && \
 dietpi-update 1 && \
-dietpi-cleaner 2
+G_INTERACTIVE=0 dietpi-cleaner 2
 ```
