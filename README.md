@@ -189,7 +189,7 @@ ALLOWLISTS_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/m
 WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/whitelist.txt"
 REGEX_WHITELIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/whitelist_regex.txt"
 BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blacklist.txt"
-REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/mmotti/pihole-regex/master/regex.list https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blacklist_regex.txt https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile_regex.txt"
+REGEX_BLACKLIST_URL="https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/rules/blacklist_regex.txt"
 EOF
 ```
 

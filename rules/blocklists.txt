@@ -3,6 +3,7 @@
 
 #-----------------------------------------------------------------------------#
 
+# Global
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.plus.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/fake.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/popupads.txt
@@ -21,5 +22,8 @@ https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.roku
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.vivo.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.oppo-realme.txt
 https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt
+
+# Region specific
+## Poland
 https://raw.githubusercontent.com/FiltersHeroes/KADhosts/master/KADhosts.txt
 https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-pihole-filters/hostfile.txt
