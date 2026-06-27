@@ -1,4 +1,7 @@
-# Raspberry Pi and Pi-Hole
+# Raspberry Pi and Pi-Hole [![no-maintenance-icon]][no-maintenance-url]
+
+[no-maintenance-icon]: https://img.shields.io/badge/No%20Maintenance%20Intended-%E2%9C%95-red.svg?style=flat-square&longCache=true
+[no-maintenance-url]: https://unmaintained.tech/
 
 <div align="center">
   <img src="https://github.com/denis-g/rpi4-pihole-settings/blob/master/assets/logo.png" alt="DietPi, Pi-hole, Unbound" style="width: 100%;" />
