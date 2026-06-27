@@ -14,6 +14,8 @@ https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt
 https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/tif.txt
 ## Dynamic DNS - Protects against the malicious use of dynamic DNS services!
 https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/dyndns.txt
+## DNS Rebind Protection - Prevents attackers from resolving domains to local IPs!
+https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adguard/dns-rebind-protection.txt
 ## Gambling - Protects against gambling content!
 https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/gambling.txt
 ## Native Tracker - Broadband tracker of devices, services and operating systems
